@@ -7,19 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <img src="images/cupido.png" alt="Cupido" class="cupid">
-    
     <div class="container">
+        <img src="https://i.ibb.co/8D1JvZVk/cupido.png" alt="Cupido" class="cupid">
+        
         <h1>SENHA DA MEGASENA</h1>
         
         <div class="game-container">
             <p>Tentativas restantes: <span id="attempts">5</span></p>
             <div class="password-container">
                 <input type="password" id="password" placeholder="Digite a senha">
-            </div>
-            <button type="button" id="submit-btn" onclick="checkPassword()">Enviar</button>
-            <div id="hint-container" class="hint-container">
-                <p id="hint-text"></p>
+                <button onclick="checkPassword()">Enviar</button>
             </div>
         </div>
     </div>

@@ -81,8 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     function showHint(message) {
-        hintText.textContent = message;
-        hintContainer.classList.add('visible');
+        const hint = document.createElement('div');
+        hint.className = 'hint';
+        hint.innerHTML = `<p style="color: #ffffff !important; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">${message}</p>`;
+        document.querySelector('.game-container').appendChild(hint);
     }
 
     // Função para iniciar a contagem regressiva
@@ -124,15 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
             attempts++;
             attemptsElement.textContent = maxAttempts - attempts;
             
-            if (attempts >= maxAttempts) {
-                showHint('A senha é: 2000');
+            if (attempts === 2) {
+                showHint("Dica: É uma data...");
+            } else if (attempts === 3) {
+                showHint("Data onde o todo espaço tempo, futuro, presente e passado se encheu de amor e alegria!");
+            } else if (attempts === 5) {
+                showHint("A senha é: 2000");
                 setTimeout(() => {
                     location.reload();
                 }, 3000);
-            } else if (attempts === 3) {
-                showHint('Data onde o todo espaço tempo, futuro, presente e passado se encheu de amor e alegria!');
-            } else if (attempts === 2) {
-                showHint('Dica: É uma data...');
             }
             
             passwordInput.value = '';
