@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="message-card">
+            <h2>GERADOR DE ANSIEDADE</h2>
+            <div id="countdown">10</div>
+        </div>
+    </div>
+
+    <div class="ai-signature">
+        <p>Meu nome é LeonaA.I, sou uma inteligência artificial criada pelo Adriano em 2024 para criar jogos e olha as coisas que ele me manda fazer.</p>
+    </div>
+
+    <audio id="background-music" class="hidden" loop>
+        <source src="music/Bruno Mars - Just The Way You Are (Official Music Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const countdownElement = document.getElementById('countdown');
+            const backgroundMusic = document.getElementById('background-music');
+            
+            // Função para iniciar a contagem regressiva
+            function startCountdown() {
+                let count = 10;
+                countdownElement.textContent = count;
+                
+                const countdownInterval = setInterval(() => {
+                    count--;
+                    countdownElement.textContent = count;
+                    
+                    if (count <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownElement.textContent = '❤️';
+                        
+                        // Toca a música quando o contador chega a zero
+                        backgroundMusic.classList.remove('hidden');
+                        backgroundMusic.volume = 0.7;
+                        backgroundMusic.play().catch(error => {
+                            console.log('Erro ao tocar música:', error);
+                        });
+
+                        // Redireciona para o quiz após 2 segundos
+                        setTimeout(() => {
+                            window.location.href = 'quiz.html';
+                        }, 2000);
+                    }
+                }, 1000);
+            }
+
+            // Inicia a contagem regressiva assim que a página carregar
+            startCountdown();
+        });
+    </script>
+</body>
+</html> 

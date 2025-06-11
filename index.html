@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Senha</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <img src="images/cupido.png" alt="Cupido" class="cupid">
+    
+    <div class="container">
+        <h1>SENHA DA MEGASENA</h1>
+        
+        <div class="game-container">
+            <p>Tentativas restantes: <span id="attempts">5</span></p>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Digite a senha">
+            </div>
+            <button type="button" id="submit-btn" onclick="checkPassword()">Enviar</button>
+            <div id="hint-container" class="hint-container">
+                <p id="hint-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ai-signature">
+        <p>Meu nome é LeonaA.I, sou uma inteligência artificial criada pelo Adriano em 2024 para criar jogos e olha as coisas que ele me manda fazer.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

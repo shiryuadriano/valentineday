@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container">
+            <h2>Jogo nada Romântico</h2>
+            
+            <form id="quiz-form">
+                <div class="question">
+                    <h3>1. Qual meu anime preferido?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="anime" value="naruto"> Naruto</label>
+                        <label><input type="radio" name="anime" value="jujutsu"> Jujutsu Kaisen</label>
+                        <label><input type="radio" name="anime" value="dragonball"> Dragon ball</label>
+                        <label><input type="radio" name="anime" value="demonslayer"> Demon Slayer</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>2. Qual cor eu não enxergo?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="color" value="verde"> Verde</label>
+                        <label><input type="radio" name="color" value="vermelho"> Vermelho</label>
+                        <label><input type="radio" name="color" value="azul"> Azul</label>
+                        <label><input type="radio" name="color" value="amarelo"> Amarelo</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>3. Qual meu doce predileto?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="sweet" value="beijinho"> Beijinho</label>
+                        <label><input type="radio" name="sweet" value="pudim"> Pudim</label>
+                        <label><input type="radio" name="sweet" value="brigadeiro"> Brigadeiro</label>
+                        <label><input type="radio" name="sweet" value="palha"> Palha Italiana</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>4. Qual minha série predileta?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="series" value="flash"> Flash</label>
+                        <label><input type="radio" name="series" value="supernatural"> Sobrenatural</label>
+                        <label><input type="radio" name="series" value="lucifer"> Lúcifer</label>
+                        <label><input type="radio" name="series" value="arrow"> Arqueiro Verde</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>5. Qual a data do nosso aniversário de namoro?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="date" value="1305"> 13/05</label>
+                        <label><input type="radio" name="date" value="2804"> 28/04</label>
+                        <label><input type="radio" name="date" value="0806"> 08/06</label>
+                        <label><input type="radio" name="date" value="1902"> 19/02</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>6. Qual meu jogo predileto?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="game" value="valorant"> Valorant</label>
+                        <label><input type="radio" name="game" value="lol"> League of Legends</label>
+                        <label><input type="radio" name="game" value="albion"> Albion Online</label>
+                        <label><input type="radio" name="game" value="cs"> Counter Strike</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>7. Qual meu gênero mais ouço?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="music" value="mpb"> MPB</label>
+                        <label><input type="radio" name="music" value="rap"> Rap no geral</label>
+                        <label><input type="radio" name="music" value="reggae"> Reggae</label>
+                        <label><input type="radio" name="music" value="rock"> Rock n Roll e Metal</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>8. Qual meu filme predileto?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="movie" value="lotr"> Senhor dos Anéis</label>
+                        <label><input type="radio" name="movie" value="firsttime"> Como se fosse a primeira vez</label>
+                        <label><input type="radio" name="movie" value="matrix"> Matrix</label>
+                        <label><input type="radio" name="movie" value="harry"> Harry Potter</label>
+                    </div>
+                </div>
+
+                <button type="button" onclick="checkQuiz()">Concluir</button>
+            </form>
+
+            <div id="result-message" class="result-message hidden"></div>
+        </div>
+    </div>
+
+    <div class="ai-signature">
+        <p>Adriano você é muito babaca by:LeonaA.I</p>
+    </div>
+
+    <script>
+        // Função para embaralhar as opções
+        function shuffleOptions() {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(question => {
+                const options = question.querySelector('.options');
+                const labels = Array.from(options.querySelectorAll('label'));
+                
+                // Embaralha as opções
+                for (let i = labels.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    options.appendChild(labels[j]);
+                }
+            });
+        }
+
+        // Embaralha as opções quando a página carrega
+        document.addEventListener('DOMContentLoaded', shuffleOptions);
+
+        function checkQuiz() {
+            const answers = {
+                anime: 'naruto',
+                color: 'vermelho',
+                sweet: 'pudim',
+                series: 'supernatural',
+                date: '2804',
+                game: 'lol',
+                music: 'rap',
+                movie: 'firsttime'
+            };
+
+            let allCorrect = true;
+            let wrongAnswers = [];
+
+            for (const [question, correctAnswer] of Object.entries(answers)) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (!selected || selected.value !== correctAnswer) {
+                    allCorrect = false;
+                    wrongAnswers.push(question);
+                }
+            }
+
+            const resultMessage = document.getElementById('result-message');
+            resultMessage.classList.remove('hidden');
+
+            if (allCorrect) {
+                resultMessage.textContent = 'Parabéns! Você acertou todas as respostas!';
+                resultMessage.style.color = '#00ff00';
+            } else {
+                resultMessage.textContent = 'Ops! Você errou algumas respostas. Tente novamente!';
+                resultMessage.style.color = '#ff0000';
+            }
+        }
+    </script>
+</body>
+</html> 
